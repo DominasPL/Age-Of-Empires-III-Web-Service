@@ -27,4 +27,12 @@ public class CivilizationCoverter {
         civilizationDTO.setCivilizationName(civilization.getCivilizationName());
         return civilizationDTO;
     }
+
+    public static Civilization convertToCivilization(CivilizationDTO civilizationDTO) {
+
+        Civilization civilization = new Civilization();
+        civilization.setCivilizationName(civilizationDTO.getCivilizationName());
+        return civilization;
+
+    }
 }

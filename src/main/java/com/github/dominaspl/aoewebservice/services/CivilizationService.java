@@ -9,4 +9,6 @@ public interface CivilizationService {
     List<CivilizationDTO> getAllCivilizations();
 
     CivilizationDTO getCivilizationById(Long id);
+
+    CivilizationDTO addNewCivilization(CivilizationDTO civilizationDTO);
 }

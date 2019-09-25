@@ -43,5 +43,30 @@ public class CivilizationServiceImpl implements CivilizationService {
         return CivilizationCoverter.convertToCivilizationDTO(civilization);
     }
 
+    @Override
+    public CivilizationDTO addNewCivilization(CivilizationDTO civilizationDTO) {
+
+        if (civilizationDTO == null) {
+            throw new IllegalArgumentException("Civilization must be given!");
+        }
+
+        if (!checkCivilizationNameIsAvailable(civilizationDTO.getCivilizationName())) {
+            throw new IllegalArgumentException("This civilization is not available!");
+        }
+
+        Civilization civilization = CivilizationCoverter.convertToCivilization(civilizationDTO);
+        civilizationRepository.save(civilization);
+
+        return civilizationDTO;
+    }
+
+    public boolean checkCivilizationNameIsAvailable(String civilizationName) {
+
+        Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationName(civilizationName);
+        Civilization civilization = optionalCivilization.orElse(null);
+
+        return civilization == null;
+    }
+
 
 }
