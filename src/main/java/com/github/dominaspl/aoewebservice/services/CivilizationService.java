@@ -10,5 +10,7 @@ public interface CivilizationService {
 
     CivilizationDTO getCivilizationById(Long id);
 
-    CivilizationDTO addNewCivilization(CivilizationDTO civilizationDTO);
+    void addNewCivilization(CivilizationDTO civilizationDTO);
+
+    void updateCivilization(CivilizationDTO civilizationDTO, Long id);
 }

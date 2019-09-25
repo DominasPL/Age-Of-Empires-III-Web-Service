@@ -44,7 +44,7 @@ public class CivilizationServiceImpl implements CivilizationService {
     }
 
     @Override
-    public CivilizationDTO addNewCivilization(CivilizationDTO civilizationDTO) {
+    public void addNewCivilization(CivilizationDTO civilizationDTO) {
 
         if (civilizationDTO == null) {
             throw new IllegalArgumentException("Civilization must be given!");
@@ -57,7 +57,25 @@ public class CivilizationServiceImpl implements CivilizationService {
         Civilization civilization = CivilizationCoverter.convertToCivilization(civilizationDTO);
         civilizationRepository.save(civilization);
 
-        return civilizationDTO;
+    }
+
+    @Override
+    public void updateCivilization(CivilizationDTO civilizationDTO, Long id) {
+
+        if (civilizationDTO == null || id == null) {
+            throw new IllegalArgumentException("Civilization and id must be given!");
+        }
+
+        Optional<Civilization> optionalCivilization = civilizationRepository.findById(id);
+        Civilization civilization = optionalCivilization.orElse(null);
+
+        if (civilization == null) {
+            addNewCivilization(civilizationDTO);
+        } else {
+            civilization.setCivilizationName(civilizationDTO.getCivilizationName());
+            civilizationRepository.save(civilization);
+        }
+
     }
 
     public boolean checkCivilizationNameIsAvailable(String civilizationName) {
