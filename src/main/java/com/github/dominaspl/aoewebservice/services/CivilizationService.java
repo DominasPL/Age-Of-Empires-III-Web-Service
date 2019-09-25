@@ -13,4 +13,6 @@ public interface CivilizationService {
     void addNewCivilization(CivilizationDTO civilizationDTO);
 
     void updateCivilization(CivilizationDTO civilizationDTO, Long id);
+
+    CivilizationDTO deleteCivilization(Long id);
 }

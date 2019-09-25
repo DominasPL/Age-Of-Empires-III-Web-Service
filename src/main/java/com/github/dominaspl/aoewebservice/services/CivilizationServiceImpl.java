@@ -78,6 +78,17 @@ public class CivilizationServiceImpl implements CivilizationService {
 
     }
 
+    @Override
+    public CivilizationDTO deleteCivilization(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        return null;
+
+    }
+
     public boolean checkCivilizationNameIsAvailable(String civilizationName) {
 
         Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationName(civilizationName);

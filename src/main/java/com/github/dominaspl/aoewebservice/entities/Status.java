@@ -6,20 +6,16 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "civilizations")
+@Table(name = "statuses")
 @Data
 @RequiredArgsConstructor
-public class Civilization {
+public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long civilizationId;
+    private Long statusId;
 
     @Column(nullable = false, unique = true)
-    private String civilizationName;
-
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status status;
+    private boolean isActive;
 
 }
