@@ -7,6 +7,7 @@ import com.github.dominaspl.aoewebservice.repositories.CivilizationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CivilizationServiceImpl implements CivilizationService {
@@ -27,6 +28,19 @@ public class CivilizationServiceImpl implements CivilizationService {
         }
 
         return CivilizationCoverter.convertToCivilizationDTOList(allCivilizations);
+    }
+
+    @Override
+    public CivilizationDTO getCivilizationById(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Civilization> optionalCivilization = civilizationRepository.findById(id);
+        Civilization civilization = optionalCivilization.orElseThrow(() -> new IllegalStateException("Civilization not found!"));
+
+        return CivilizationCoverter.convertToCivilizationDTO(civilization);
     }
 
 

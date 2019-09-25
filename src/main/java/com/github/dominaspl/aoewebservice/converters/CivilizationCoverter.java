@@ -20,4 +20,11 @@ public class CivilizationCoverter {
 
         return civilizationDTOList;
     }
+
+    public static CivilizationDTO convertToCivilizationDTO(Civilization civilization) {
+
+        CivilizationDTO civilizationDTO = new CivilizationDTO();
+        civilizationDTO.setCivilizationName(civilization.getCivilizationName());
+        return civilizationDTO;
+    }
 }

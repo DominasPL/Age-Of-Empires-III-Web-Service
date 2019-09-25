@@ -3,11 +3,9 @@ package com.github.dominaspl.aoewebservice.controllers;
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.services.CivilizationService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -22,10 +20,16 @@ public class CivilizationController {
         this.civilizationService = civilizationService;
     }
 
-    @GetMapping(path = "/civs", produces = {"application/json"})
+    @GetMapping(path = "/civilizations", produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public List<CivilizationDTO> getAllCivilizations() {
         return civilizationService.getAllCivilizations();
+    }
+
+    @GetMapping(path = "/civilizations/civilization/{id}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public CivilizationDTO getCivilizationById(@PathVariable("id") @Positive Long id) {
+        return civilizationService.getCivilizationById(id);
     }
 
 }
