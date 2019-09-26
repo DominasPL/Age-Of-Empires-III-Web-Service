@@ -4,24 +4,23 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "civilizations")
+@Table(name = "units")
 @Data
 @RequiredArgsConstructor
-public class Civilization {
+public class Unit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long civilizationId;
+    private Long unitId;
 
     @Column(nullable = false, unique = true)
-    private String civilizationName;
+    private String unitName;
 
-    @ManyToOne
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "unit_information_id", referencedColumnName = "unit_information_id")
+    private UnitInformation unitInformation;
+
 
 }
