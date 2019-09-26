@@ -31,4 +31,4 @@ build/
 .vscode/
 
 ### SQL files ###
-data.sql
+datak.sql

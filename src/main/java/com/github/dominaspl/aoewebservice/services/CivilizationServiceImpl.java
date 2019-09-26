@@ -3,6 +3,7 @@ package com.github.dominaspl.aoewebservice.services;
 import com.github.dominaspl.aoewebservice.converters.CivilizationCoverter;
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.entities.Civilization;
+import com.github.dominaspl.aoewebservice.entities.Status;
 import com.github.dominaspl.aoewebservice.repositories.CivilizationRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class CivilizationServiceImpl implements CivilizationService {
 
     private CivilizationRepository civilizationRepository;
+    private StatusService statusService;
 
-    public CivilizationServiceImpl(CivilizationRepository civilizationRepository) {
+    public CivilizationServiceImpl(CivilizationRepository civilizationRepository, StatusService statusService) {
         this.civilizationRepository = civilizationRepository;
+        this.statusService = statusService;
     }
 
     @Override
@@ -85,7 +88,13 @@ public class CivilizationServiceImpl implements CivilizationService {
             throw new IllegalArgumentException("Id must be given!");
         }
 
-        return null;
+        Optional<Civilization> optionalCivilization = civilizationRepository.findById(id);
+        Civilization civilization = optionalCivilization.orElseThrow(() -> new IllegalStateException("Civilization not found!"));
+
+        civilization.setStatus(statusService.getAllStatuses().get(0));
+        civilizationRepository.save(civilization);
+
+        return CivilizationCoverter.convertToCivilizationDTO(civilization);
 
     }
 

@@ -1,7 +1,6 @@
 package com.github.dominaspl.aoewebservice.controllers;
 
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
-import com.github.dominaspl.aoewebservice.entities.Civilization;
 import com.github.dominaspl.aoewebservice.services.CivilizationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -55,5 +54,6 @@ public class CivilizationController {
     public CivilizationDTO deleteCivilization(@PathVariable("id") @Positive Long id) {
         return civilizationService.deleteCivilization(id);
     }
+
 
 }
