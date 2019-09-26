@@ -19,4 +19,11 @@ public class UnitInformation {
                 inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Type> types = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "civilization_id")
+    private Civilization civilization;
+
+    @ManyToOne
+    @JoinColumn(name = "age_id")
+    private Age age;
 }

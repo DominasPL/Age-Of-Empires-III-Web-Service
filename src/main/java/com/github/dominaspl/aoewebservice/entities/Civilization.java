@@ -15,6 +15,7 @@ public class Civilization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "civilization_id")
     private Long civilizationId;
 
     @Column(nullable = false, unique = true)
