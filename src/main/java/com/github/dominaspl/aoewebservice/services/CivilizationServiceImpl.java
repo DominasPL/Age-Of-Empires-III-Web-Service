@@ -24,7 +24,7 @@ public class CivilizationServiceImpl implements CivilizationService {
     @Override
     public List<CivilizationDTO> getAllCivilizations() {
 
-        List<Civilization> allCivilizations = civilizationRepository.findAll();
+        List<Civilization> allCivilizations = civilizationRepository.findByStatus(statusService.getAllStatuses().get(1));
 
         if (allCivilizations == null) {
             throw new IllegalStateException("Civilizations not found!");
@@ -40,7 +40,7 @@ public class CivilizationServiceImpl implements CivilizationService {
             throw new IllegalArgumentException("Id must be given!");
         }
 
-        Optional<Civilization> optionalCivilization = civilizationRepository.findById(id);
+        Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationIdAndStatus(id, statusService.getAllStatuses().get(1));
         Civilization civilization = optionalCivilization.orElseThrow(() -> new IllegalStateException("Civilization not found!"));
 
         return CivilizationCoverter.convertToCivilizationDTO(civilization);
