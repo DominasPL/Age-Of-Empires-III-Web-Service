@@ -69,7 +69,7 @@ public class CivilizationServiceImpl implements CivilizationService {
             throw new IllegalArgumentException("Civilization and id must be given!");
         }
 
-        Optional<Civilization> optionalCivilization = civilizationRepository.findById(id);
+        Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationIdAndStatus(id, statusService.getAllStatuses().get(1));
         Civilization civilization = optionalCivilization.orElse(null);
 
         if (civilization == null) {
@@ -88,7 +88,7 @@ public class CivilizationServiceImpl implements CivilizationService {
             throw new IllegalArgumentException("Id must be given!");
         }
 
-        Optional<Civilization> optionalCivilization = civilizationRepository.findById(id);
+        Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationIdAndStatus(id, statusService.getAllStatuses().get(1));
         Civilization civilization = optionalCivilization.orElseThrow(() -> new IllegalStateException("Civilization not found!"));
 
         civilization.setStatus(statusService.getAllStatuses().get(0));
