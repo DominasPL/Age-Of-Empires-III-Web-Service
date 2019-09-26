@@ -57,7 +57,7 @@ public class CivilizationServiceImpl implements CivilizationService {
             throw new IllegalArgumentException("This civilization is not available!");
         }
 
-        Civilization civilization = CivilizationCoverter.convertToCivilization(civilizationDTO);
+        Civilization civilization = CivilizationCoverter.convertToCivilization(civilizationDTO, statusService.getAllStatuses().get(1));
         civilizationRepository.save(civilization);
 
     }

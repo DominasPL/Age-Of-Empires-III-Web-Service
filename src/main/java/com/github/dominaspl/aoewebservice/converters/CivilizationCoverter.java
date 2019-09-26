@@ -2,6 +2,7 @@ package com.github.dominaspl.aoewebservice.converters;
 
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.entities.Civilization;
+import com.github.dominaspl.aoewebservice.entities.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,11 @@ public class CivilizationCoverter {
         return civilizationDTO;
     }
 
-    public static Civilization convertToCivilization(CivilizationDTO civilizationDTO) {
+    public static Civilization convertToCivilization(CivilizationDTO civilizationDTO, Status status) {
 
         Civilization civilization = new Civilization();
         civilization.setCivilizationName(civilizationDTO.getCivilizationName());
+        civilization.setStatus(status);
         return civilization;
 
     }
