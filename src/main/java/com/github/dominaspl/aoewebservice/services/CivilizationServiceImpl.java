@@ -3,7 +3,6 @@ package com.github.dominaspl.aoewebservice.services;
 import com.github.dominaspl.aoewebservice.converters.CivilizationCoverter;
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.entities.Civilization;
-import com.github.dominaspl.aoewebservice.entities.Status;
 import com.github.dominaspl.aoewebservice.repositories.CivilizationRepository;
 import org.springframework.stereotype.Service;
 

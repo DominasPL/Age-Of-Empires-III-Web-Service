@@ -22,5 +22,4 @@ public class Unit {
     @JoinColumn(name = "unit_information_id", referencedColumnName = "unit_information_id")
     private UnitInformation unitInformation;
 
-
 }
