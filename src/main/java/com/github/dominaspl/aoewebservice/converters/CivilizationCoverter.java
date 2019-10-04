@@ -35,6 +35,5 @@ public class CivilizationCoverter {
         civilization.setCivilizationName(civilizationDTO.getCivilizationName());
         civilization.setStatus(status);
         return civilization;
-
     }
 }
