@@ -33,5 +33,12 @@ public class UnitController {
         return unitService.findUnitById(id);
     }
 
+    @PostMapping(path = "/unit", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public UnitDTO addUnit(@RequestBody UnitDTO unitDTO) {
+        unitService.addNewUnit(unitDTO);
+        return unitDTO;
+    }
+
 }
 

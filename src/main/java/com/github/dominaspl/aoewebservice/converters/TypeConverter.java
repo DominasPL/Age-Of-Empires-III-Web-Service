@@ -5,6 +5,7 @@ import com.github.dominaspl.aoewebservice.entities.Type;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class TypeConverter {
 
@@ -14,10 +15,25 @@ public class TypeConverter {
 
         for (Type type : types) {
             TypeDTO typeDTO = new TypeDTO();
+            typeDTO.setTypeId(type.getTypeId());
             typeDTO.setTypeName(type.getTypeName());
             typeDTOList.add(typeDTO);
         }
 
         return typeDTOList;
+    }
+
+    public static List<Type> convertToTypeList(Set<TypeDTO> filteredTypes) {
+
+        List<Type> types = new ArrayList<>();
+
+        for (TypeDTO typeDTO : filteredTypes) {
+            Type type = new Type();
+            type.setTypeId(typeDTO.getTypeId());
+            type.setTypeName(typeDTO.getTypeName());
+            types.add(type);
+        }
+
+        return types;
     }
 }

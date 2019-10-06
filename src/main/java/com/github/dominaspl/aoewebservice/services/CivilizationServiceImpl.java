@@ -5,6 +5,7 @@ import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.entities.Civilization;
 import com.github.dominaspl.aoewebservice.repositories.CivilizationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +47,7 @@ public class CivilizationServiceImpl implements CivilizationService {
     }
 
     @Override
+    @Transactional
     public void addNewCivilization(CivilizationDTO civilizationDTO) {
 
         if (civilizationDTO == null) {

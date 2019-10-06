@@ -15,6 +15,7 @@ public class CivilizationCoverter {
 
         for (Civilization civilization : allCivilizations) {
             CivilizationDTO civilizationDTO = new CivilizationDTO();
+            civilizationDTO.setCivilizationId(civilization.getCivilizationId());
             civilizationDTO.setCivilizationName(civilization.getCivilizationName());
             civilizationDTOList.add(civilizationDTO);
         }
@@ -35,5 +36,20 @@ public class CivilizationCoverter {
         civilization.setCivilizationName(civilizationDTO.getCivilizationName());
         civilization.setStatus(status);
         return civilization;
+    }
+
+    public static List<Civilization> convertToCivilizationList(List<CivilizationDTO> civilizationsDTO, Status status) {
+
+        List<Civilization> civilizations = new ArrayList<>();
+
+        for (CivilizationDTO civilizationDTO : civilizationsDTO) {
+            Civilization civilization = new Civilization();
+            civilization.setCivilizationId(civilizationDTO.getCivilizationId());
+            civilization.setCivilizationName(civilizationDTO.getCivilizationName());
+            civilization.setStatus(status);
+            civilizations.add(civilization);
+        }
+
+        return civilizations;
     }
 }

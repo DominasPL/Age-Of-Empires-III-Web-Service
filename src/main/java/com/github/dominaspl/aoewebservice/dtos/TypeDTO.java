@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TypeDTO {
 
+    private Long typeId;
     private String typeName;
 
 

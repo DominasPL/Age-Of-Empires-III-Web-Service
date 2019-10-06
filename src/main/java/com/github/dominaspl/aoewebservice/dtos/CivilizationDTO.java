@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 @RequiredArgsConstructor
 public class CivilizationDTO {
 
+    private Long civilizationId;
+
     @NotBlank
     @Size(min = 3, max = 20)
     private String civilizationName;

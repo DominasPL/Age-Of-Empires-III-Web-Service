@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AgeDTO {
 
+    private Long ageId;
     private String ageName;
 
 }
