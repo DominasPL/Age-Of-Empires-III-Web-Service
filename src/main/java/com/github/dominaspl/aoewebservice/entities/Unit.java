@@ -22,4 +22,7 @@ public class Unit {
     @JoinColumn(name = "unit_information_id", referencedColumnName = "unit_information_id")
     private UnitInformation unitInformation;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
 }
