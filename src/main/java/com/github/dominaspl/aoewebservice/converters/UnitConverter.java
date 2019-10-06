@@ -12,11 +12,10 @@ public class UnitConverter {
 
         List<UnitDTO> unitDTOList = new ArrayList<>();
 
-
         for (Unit unit : allUnits) {
             UnitDTO unitDTO = new UnitDTO();
             unitDTO.setUnitName(unit.getUnitName());
-            unitDTO.setUnitInformation(unit.getUnitInformation());
+            unitDTO.setUnitInformation(UnitInformationConverter.convertToUnitInformationDTO(unit.getUnitInformation()));
             unitDTOList.add(unitDTO);
         }
 
