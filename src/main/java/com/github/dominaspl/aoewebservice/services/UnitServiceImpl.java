@@ -80,7 +80,7 @@ public class UnitServiceImpl implements UnitService {
                 filteredCivilizations,
                 statusService.getAllStatuses().get(1)
         );
-       
+
         unitRepository.save(unit);
     }
 

@@ -5,6 +5,7 @@ import com.github.dominaspl.aoewebservice.services.UnitService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class UnitController {
 
     @PostMapping(path = "/unit", produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public UnitDTO addUnit(@RequestBody UnitDTO unitDTO) {
+    public UnitDTO addUnit(@Valid @RequestBody UnitDTO unitDTO) {
         unitService.addNewUnit(unitDTO);
         return unitDTO;
     }
