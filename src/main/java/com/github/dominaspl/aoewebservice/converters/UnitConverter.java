@@ -21,4 +21,13 @@ public class UnitConverter {
 
         return unitDTOList;
     }
+
+    public static UnitDTO convertToUnitDTO(Unit unit) {
+
+        UnitDTO unitDTO = new UnitDTO();
+        unitDTO.setUnitName(unit.getUnitName());
+        unitDTO.setUnitInformation(UnitInformationConverter.convertToUnitInformationDTO(unit.getUnitInformation()));
+
+        return unitDTO;
+    }
 }

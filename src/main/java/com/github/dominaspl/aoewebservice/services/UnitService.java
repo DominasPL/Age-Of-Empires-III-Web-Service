@@ -8,5 +8,5 @@ public interface UnitService {
 
     List<UnitDTO> getAllUnits();
 
-
+    UnitDTO findUnitById(Long id);
 }

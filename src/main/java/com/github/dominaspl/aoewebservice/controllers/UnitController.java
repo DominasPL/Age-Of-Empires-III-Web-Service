@@ -5,6 +5,7 @@ import com.github.dominaspl.aoewebservice.services.UnitService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -26,10 +27,11 @@ public class UnitController {
         return unitService.getAllUnits();
     }
 
-
-
-
-
+    @GetMapping(path = "/unit/{id}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public UnitDTO getUnitById(@PathVariable("id") @Positive Long id) {
+        return unitService.findUnitById(id);
+    }
 
 }
 
