@@ -3,6 +3,7 @@ package com.github.dominaspl.aoewebservice.services;
 import com.github.dominaspl.aoewebservice.converters.AgeConverter;
 import com.github.dominaspl.aoewebservice.dtos.AgeDTO;
 import com.github.dominaspl.aoewebservice.entities.Age;
+import com.github.dominaspl.aoewebservice.entities.Status;
 import com.github.dominaspl.aoewebservice.repositories.AgeRepository;
 import org.springframework.stereotype.Service;
 
@@ -52,11 +53,18 @@ public class AgeServiceImpl implements AgeService {
             throw new IllegalArgumentException("Age must be given!");
         }
 
-        if(!checkAgeIsAvailable(ageDTO)) {
-            throw new IllegalArgumentException("Age is not available!");
-        }
+        Optional<Age> optionalAge = ageRepository.findByAgeName(ageDTO.getAgeName());
+        Age age = optionalAge.orElse(null);
+        Status status = statusService.getAllStatuses().get(1);
 
-        ageRepository.save(AgeConverter.convertToAge(ageDTO, statusService.getAllStatuses().get(1)));
+        if (age == null) {
+            ageRepository.save(AgeConverter.convertToAge(ageDTO, status));
+        } else if (age.getStatus() != status) {
+            age.setStatus(status);
+            ageRepository.save(age);
+        } else {
+            throw new IllegalStateException("Age is not available!");
+        }
     }
 
     @Override
@@ -92,13 +100,5 @@ public class AgeServiceImpl implements AgeService {
         ageRepository.save(age);
 
         return AgeConverter.convertToAgeDTO(age);
-    }
-
-    public boolean checkAgeIsAvailable(AgeDTO ageDTO) {
-
-        Optional<Age> optionalAge = ageRepository.findByAgeName(ageDTO.getAgeName());
-        Age age = optionalAge.orElse(null);
-
-        return age == null;
     }
 }
