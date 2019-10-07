@@ -13,4 +13,6 @@ public interface AgeService {
     void addNewAge(AgeDTO ageDTO);
 
     void updateAge(Long id, AgeDTO ageDTO);
+
+    AgeDTO deleteAge(Long id);
 }

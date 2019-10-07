@@ -50,4 +50,10 @@ public class AgeController {
         return ageDTO;
     }
 
+    @DeleteMapping(path = "/age/{id}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public AgeDTO deleteAge(@PathVariable("id") @Positive Long id) {
+        return ageService.deleteAge(id);
+    }
+
 }

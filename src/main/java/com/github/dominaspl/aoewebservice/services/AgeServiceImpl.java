@@ -78,6 +78,22 @@ public class AgeServiceImpl implements AgeService {
 
     }
 
+    @Override
+    public AgeDTO deleteAge(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Age> optionalAge = ageRepository.findById(id);
+        Age age = optionalAge.orElseThrow(() -> new IllegalStateException("Age not found!"));
+
+        age.setStatus(statusService.getAllStatuses().get(0));
+        ageRepository.save(age);
+
+        return AgeConverter.convertToAgeDTO(age);
+    }
+
     public boolean checkAgeIsAvailable(AgeDTO ageDTO) {
 
         Optional<Age> optionalAge = ageRepository.findByAgeName(ageDTO.getAgeName());
