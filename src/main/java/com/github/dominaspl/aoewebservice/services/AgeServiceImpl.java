@@ -59,6 +59,25 @@ public class AgeServiceImpl implements AgeService {
         ageRepository.save(AgeConverter.convertToAge(ageDTO, statusService.getAllStatuses().get(1)));
     }
 
+    @Override
+    public void updateAge(Long id, AgeDTO ageDTO) {
+
+        if (id == null || ageDTO == null) {
+            throw new IllegalArgumentException("Incorrect values!");
+        }
+
+        Optional<Age> optionalAge = ageRepository.findById(id);
+        Age age = optionalAge.orElse(null);
+
+        if (age == null) {
+            addNewAge(ageDTO);
+        } else {
+            age.setAgeName(ageDTO.getAgeName());
+            ageRepository.save(age);
+        }
+
+    }
+
     public boolean checkAgeIsAvailable(AgeDTO ageDTO) {
 
         Optional<Age> optionalAge = ageRepository.findByAgeName(ageDTO.getAgeName());

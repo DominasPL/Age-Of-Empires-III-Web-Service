@@ -11,4 +11,6 @@ public interface AgeService {
     AgeDTO findById(Long id);
 
     void addNewAge(AgeDTO ageDTO);
+
+    void updateAge(Long id, AgeDTO ageDTO);
 }

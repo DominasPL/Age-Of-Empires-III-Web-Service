@@ -43,4 +43,11 @@ public class AgeController {
         return ageDTO;
     }
 
+    @PutMapping(path = "/age/{id}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public AgeDTO updateAgeData(@PathVariable("id") @Positive Long id, @Valid @RequestBody AgeDTO ageDTO) {
+        ageService.updateAge(id, ageDTO);
+        return ageDTO;
+    }
+
 }
