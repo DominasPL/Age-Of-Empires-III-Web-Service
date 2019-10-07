@@ -1,6 +1,7 @@
 package com.github.dominaspl.aoewebservice.services;
 
 import com.github.dominaspl.aoewebservice.converters.UnitConverter;
+import com.github.dominaspl.aoewebservice.converters.UnitInformationConverter;
 import com.github.dominaspl.aoewebservice.dtos.AgeDTO;
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.dtos.TypeDTO;
@@ -82,6 +83,30 @@ public class UnitServiceImpl implements UnitService {
         );
 
         unitRepository.save(unit);
+    }
+
+    @Override
+    public void updateUnitData(Long id, UnitDTO unitDTO) {
+
+        if (id == null || unitDTO == null) {
+            throw new IllegalArgumentException("Incorrect values!");
+        }
+
+        Optional<Unit> optionalUnit = unitRepository.findById(id);
+        Unit unit = optionalUnit.orElse(null);
+        if (unit == null) {
+            addNewUnit(unitDTO);
+        } else {
+            unit.setUnitName(unitDTO.getUnitName());
+            unit.setUnitInformation(UnitInformationConverter.convertToUnitInformation(
+                    checkAgeInDatabase(unitDTO.getUnitInformation().getAge()),
+                    checkTypesInDatabase(unitDTO.getUnitInformation().getTypes()),
+                    checkCivilizationInDatabase(unitDTO.getUnitInformation().getCivilizations()),
+                    unit.getStatus()
+            ));
+            unit.getUnitInformation().setUnitInformationId(id);
+            unitRepository.save(unit);
+        }
     }
 
     public Set<TypeDTO> checkTypesInDatabase(List<TypeDTO> typeDTOList) {

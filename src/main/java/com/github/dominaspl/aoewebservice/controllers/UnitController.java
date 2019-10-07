@@ -21,7 +21,6 @@ public class UnitController {
         this.unitService = unitService;
     }
 
-
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UnitDTO> getAllUnits() {
@@ -38,6 +37,13 @@ public class UnitController {
     @ResponseStatus(HttpStatus.CREATED)
     public UnitDTO addUnit(@Valid @RequestBody UnitDTO unitDTO) {
         unitService.addNewUnit(unitDTO);
+        return unitDTO;
+    }
+
+    @PutMapping(path = "/unit/{id}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public UnitDTO updateUnit(@PathVariable("id") @Positive Long id, @Valid @RequestBody UnitDTO unitDTO) {
+        unitService.updateUnitData(id, unitDTO);
         return unitDTO;
     }
 

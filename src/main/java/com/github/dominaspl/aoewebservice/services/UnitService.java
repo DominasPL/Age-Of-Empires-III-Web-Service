@@ -11,4 +11,6 @@ public interface UnitService {
     UnitDTO findUnitById(Long id);
 
     void addNewUnit(UnitDTO unitDTO);
+
+    void updateUnitData(Long id, UnitDTO unitDTO);
 }

@@ -1,5 +1,6 @@
 package com.github.dominaspl.aoewebservice.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 @RequiredArgsConstructor
 public class CivilizationDTO {
 
+    @JsonIgnore
     private Long civilizationId;
 
     @NotBlank
