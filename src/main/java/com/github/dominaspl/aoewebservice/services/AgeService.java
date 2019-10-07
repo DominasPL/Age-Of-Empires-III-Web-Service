@@ -8,4 +8,5 @@ public interface AgeService {
 
     List<AgeDTO> getAllAges();
 
+    AgeDTO findById(Long id);
 }

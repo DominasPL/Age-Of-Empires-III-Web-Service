@@ -3,13 +3,14 @@ package com.github.dominaspl.aoewebservice.controllers;
 import com.github.dominaspl.aoewebservice.dtos.AgeDTO;
 import com.github.dominaspl.aoewebservice.services.AgeService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping(AgeController.BASE_URL)
 public class AgeController {
@@ -28,4 +29,18 @@ public class AgeController {
         return ageService.getAllAges();
     }
 
+
+    @GetMapping("/age/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public AgeDTO getAgeById(@Valid @Positive @PathVariable("id") Long id) {
+        return ageService.findById(id);
+    }
+
+//    @PostMapping(path = "/age", produces = {"application/json"})
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public AgeDTO addNewAge() {
+//
+//        return
+//    }
+//
 }

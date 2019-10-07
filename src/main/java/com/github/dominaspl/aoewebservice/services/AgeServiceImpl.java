@@ -7,6 +7,7 @@ import com.github.dominaspl.aoewebservice.repositories.AgeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AgeServiceImpl implements AgeService {
@@ -29,5 +30,18 @@ public class AgeServiceImpl implements AgeService {
         }
 
         return AgeConverter.convertToAgeDTOList(allAges);
+    }
+
+    @Override
+    public AgeDTO findById(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Age> optionalAge = ageRepository.findByAgeIdAndStatus(id, statusService.getAllStatuses().get(1));
+        Age age = optionalAge.orElseThrow(() -> new IllegalStateException("Age not found!"));
+
+        return AgeConverter.convertToAgeDTO(age);
     }
 }
