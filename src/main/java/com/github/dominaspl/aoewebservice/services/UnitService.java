@@ -13,4 +13,6 @@ public interface UnitService {
     void addNewUnit(UnitDTO unitDTO);
 
     void updateUnitData(Long id, UnitDTO unitDTO);
+
+    UnitDTO deleteUnit(Long id);
 }

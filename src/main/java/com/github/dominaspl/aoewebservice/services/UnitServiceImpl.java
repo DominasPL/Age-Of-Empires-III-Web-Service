@@ -109,6 +109,22 @@ public class UnitServiceImpl implements UnitService {
         }
     }
 
+    @Override
+    public UnitDTO deleteUnit(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Unit> optionalUnit = unitRepository.findById(id);
+        Unit unit = optionalUnit.orElseThrow(() -> new IllegalStateException("User not found!"));
+
+        unit.setStatus(statusService.getAllStatuses().get(0));
+        unitRepository.save(unit);
+
+        return UnitConverter.convertToUnitDTO(unit);
+    }
+
     public Set<TypeDTO> checkTypesInDatabase(List<TypeDTO> typeDTOList) {
 
         List<TypeDTO> allTypes = typeService.findAllTypes();

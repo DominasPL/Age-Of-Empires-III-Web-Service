@@ -47,5 +47,11 @@ public class UnitController {
         return unitDTO;
     }
 
+    @DeleteMapping(path = "/unit/{id}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public UnitDTO deleteUnit(@PathVariable("id") Long id) {
+        return unitService.deleteUnit(id);
+    }
+
 }
 
