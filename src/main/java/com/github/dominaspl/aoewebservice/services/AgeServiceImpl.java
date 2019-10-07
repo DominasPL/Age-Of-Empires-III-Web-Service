@@ -44,4 +44,26 @@ public class AgeServiceImpl implements AgeService {
 
         return AgeConverter.convertToAgeDTO(age);
     }
+
+    @Override
+    public void addNewAge(AgeDTO ageDTO) {
+
+        if (ageDTO == null) {
+            throw new IllegalArgumentException("Age must be given!");
+        }
+
+        if(!checkAgeIsAvailable(ageDTO)) {
+            throw new IllegalArgumentException("Age is not available!");
+        }
+
+        ageRepository.save(AgeConverter.convertToAge(ageDTO, statusService.getAllStatuses().get(1)));
+    }
+
+    public boolean checkAgeIsAvailable(AgeDTO ageDTO) {
+
+        Optional<Age> optionalAge = ageRepository.findByAgeName(ageDTO.getAgeName());
+        Age age = optionalAge.orElse(null);
+
+        return age == null;
+    }
 }

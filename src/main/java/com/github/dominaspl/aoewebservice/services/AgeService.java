@@ -9,4 +9,6 @@ public interface AgeService {
     List<AgeDTO> getAllAges();
 
     AgeDTO findById(Long id);
+
+    void addNewAge(AgeDTO ageDTO);
 }

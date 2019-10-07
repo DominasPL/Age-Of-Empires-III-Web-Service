@@ -11,4 +11,6 @@ public interface AgeRepository extends JpaRepository<Age, Long> {
     List<Age> findAllByStatus(Status status);
 
     Optional<Age> findByAgeIdAndStatus(Long id, Status status);
+
+    Optional<Age> findByAgeName(String ageName);
 }

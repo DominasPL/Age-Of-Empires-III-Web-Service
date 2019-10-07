@@ -2,6 +2,7 @@ package com.github.dominaspl.aoewebservice.converters;
 
 import com.github.dominaspl.aoewebservice.dtos.AgeDTO;
 import com.github.dominaspl.aoewebservice.entities.Age;
+import com.github.dominaspl.aoewebservice.entities.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,12 @@ public class AgeConverter {
         return ageDTO;
     }
 
-    public static Age convertToAge(AgeDTO ageDTO) {
+    public static Age convertToAge(AgeDTO ageDTO, Status status) {
 
         Age age = new Age();
         age.setAgeId(ageDTO.getAgeId());
         age.setAgeName(ageDTO.getAgeName());
+        age.setStatus(status);
         return age;
     }
 

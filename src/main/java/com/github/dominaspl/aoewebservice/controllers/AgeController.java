@@ -36,11 +36,11 @@ public class AgeController {
         return ageService.findById(id);
     }
 
-//    @PostMapping(path = "/age", produces = {"application/json"})
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public AgeDTO addNewAge() {
-//
-//        return
-//    }
-//
+    @PostMapping(path = "/age", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public AgeDTO addNewAge(@Valid @RequestBody AgeDTO ageDTO) {
+        ageService.addNewAge(ageDTO);
+        return ageDTO;
+    }
+
 }
