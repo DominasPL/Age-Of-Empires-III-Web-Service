@@ -79,6 +79,8 @@ public class AgeServiceImpl implements AgeService {
 
         if (age == null) {
             addNewAge(ageDTO);
+        } else if (age.getStatus() == statusService.getAllStatuses().get(0)) {
+            throw new IllegalStateException("Age not found!");
         } else {
             age.setAgeName(ageDTO.getAgeName());
             ageRepository.save(age);
