@@ -7,7 +7,6 @@ import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.dtos.TypeDTO;
 import com.github.dominaspl.aoewebservice.dtos.UnitDTO;
 import com.github.dominaspl.aoewebservice.entities.Unit;
-import com.github.dominaspl.aoewebservice.repositories.UnitInformationRepository;
 import com.github.dominaspl.aoewebservice.repositories.UnitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,16 +24,13 @@ public class UnitServiceImpl implements UnitService {
     private TypeService typeService;
     private CivilizationService civilizationService;
     private AgeService ageService;
-    private UnitInformationRepository unitInformationRepository;
 
-
-    public UnitServiceImpl(UnitRepository unitRepository, StatusService statusService, TypeService typeService, CivilizationService civilizationService, AgeService ageService, UnitInformationRepository unitInformationRepository) {
+    public UnitServiceImpl(UnitRepository unitRepository, StatusService statusService, TypeService typeService, CivilizationService civilizationService, AgeService ageService) {
         this.unitRepository = unitRepository;
         this.statusService = statusService;
         this.typeService = typeService;
         this.civilizationService = civilizationService;
         this.ageService = ageService;
-        this.unitInformationRepository = unitInformationRepository;
     }
 
     @Override
@@ -56,7 +52,7 @@ public class UnitServiceImpl implements UnitService {
             throw new IllegalArgumentException("Id must be given!");
         }
 
-        Optional<Unit> optionalUnit = unitRepository.findById(id);
+        Optional<Unit> optionalUnit = unitRepository.findByUnitIdAndStatus(id, statusService.getAllStatuses().get(1));
         Unit unit = optionalUnit.orElseThrow(() -> new IllegalStateException("Unit not found!"));
 
         return UnitConverter.convertToUnitDTO(unit);

@@ -3,12 +3,14 @@ package com.github.dominaspl.aoewebservice.controllers;
 import com.github.dominaspl.aoewebservice.dtos.UnitDTO;
 import com.github.dominaspl.aoewebservice.services.UnitService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping(UnitController.BASE_URL)
 public class UnitController {

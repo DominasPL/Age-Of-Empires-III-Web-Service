@@ -19,4 +19,7 @@ public class Age {
     @Column(nullable = false, unique = true)
     private String ageName;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
 }

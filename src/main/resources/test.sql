@@ -1,8 +1,8 @@
 INSERT INTO statuses (is_active)
 VALUES (1), (0);
 
-INSERT INTO ages (age_name)
-VALUES ('I'), ('II'), ('III'), ('IV'), ('V'), ('Revolution');
+INSERT INTO ages (age_name, status_id)
+VALUES ('I', 1), ('II', 1), ('III', 1), ('IV', 1), ('V', 1), ('Revolution', 1);
 
 INSERT INTO types (type_name)
 VALUES

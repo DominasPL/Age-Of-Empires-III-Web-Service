@@ -12,15 +12,17 @@ import java.util.List;
 public class AgeServiceImpl implements AgeService {
 
     private AgeRepository ageRepository;
+    private StatusService statusService;
 
-    public AgeServiceImpl(AgeRepository ageRepository) {
+    public AgeServiceImpl(AgeRepository ageRepository, StatusService statusService) {
         this.ageRepository = ageRepository;
+        this.statusService = statusService;
     }
 
     @Override
     public List<AgeDTO> getAllAges() {
 
-        List<Age> allAges = ageRepository.findAll();
+        List<Age> allAges = ageRepository.findAllByStatus(statusService.getAllStatuses().get(1));
 
         if (allAges == null) {
             throw new IllegalStateException("Ages not found!");
