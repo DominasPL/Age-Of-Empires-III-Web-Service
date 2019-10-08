@@ -3,6 +3,7 @@ package com.github.dominaspl.aoewebservice.services;
 import com.github.dominaspl.aoewebservice.converters.CivilizationCoverter;
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.entities.Civilization;
+import com.github.dominaspl.aoewebservice.entities.Status;
 import com.github.dominaspl.aoewebservice.repositories.CivilizationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,12 +55,20 @@ public class CivilizationServiceImpl implements CivilizationService {
             throw new IllegalArgumentException("Civilization must be given!");
         }
 
-        if (!checkCivilizationNameIsAvailable(civilizationDTO.getCivilizationName())) {
-            throw new IllegalArgumentException("This civilization is not available!");
+
+        Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationName(civilizationDTO.getCivilizationName());
+        Civilization civilization = optionalCivilization.orElse(null);
+        Status status = statusService.getAllStatuses().get(1);
+
+        if (civilization == null) {
+            civilizationRepository.save(CivilizationCoverter.convertToCivilization(civilizationDTO, statusService.getAllStatuses().get(1)));
+        } else if (civilization.getStatus() != status) {
+            civilization.setStatus(status);
+            civilizationRepository.save(civilization);
+        } else {
+            throw new IllegalStateException("Civilization is not available");
         }
 
-        Civilization civilization = CivilizationCoverter.convertToCivilization(civilizationDTO, statusService.getAllStatuses().get(1));
-        civilizationRepository.save(civilization);
 
     }
 
@@ -97,14 +106,6 @@ public class CivilizationServiceImpl implements CivilizationService {
 
         return CivilizationCoverter.convertToCivilizationDTO(civilization);
 
-    }
-
-    public boolean checkCivilizationNameIsAvailable(String civilizationName) {
-
-        Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationName(civilizationName);
-        Civilization civilization = optionalCivilization.orElse(null);
-
-        return civilization == null;
     }
 
 
