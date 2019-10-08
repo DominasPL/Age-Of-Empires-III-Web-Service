@@ -35,14 +35,14 @@ public class CivilizationController {
         return civilizationService.getCivilizationById(id);
     }
 
-    @PostMapping(path = "/civilization", produces = {"application/json"})
+    @PostMapping(path = "/civilization", produces = {"application/json"}, consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public CivilizationDTO addCivilization(@Valid @RequestBody CivilizationDTO civilizationDTO) {
         civilizationService.addNewCivilization(civilizationDTO);
         return civilizationDTO;
     }
 
-    @PutMapping(path = "/civilization/{id}", produces = {"application/json"})
+    @PutMapping(path = "/civilization/{id}", produces = {"application/json"}, consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public CivilizationDTO updateCivilization(@Valid @RequestBody CivilizationDTO civilizationDTO, @PathVariable("id") @Positive Long id) {
         civilizationService.updateCivilization(civilizationDTO, id);

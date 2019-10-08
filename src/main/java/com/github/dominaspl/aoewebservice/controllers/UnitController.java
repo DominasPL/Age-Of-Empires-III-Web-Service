@@ -35,14 +35,14 @@ public class UnitController {
         return unitService.findUnitById(id);
     }
 
-    @PostMapping(path = "/unit", produces = {"application/json"})
+    @PostMapping(path = "/unit", produces = {"application/json"}, consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public UnitDTO addUnit(@Valid @RequestBody UnitDTO unitDTO) {
         unitService.addNewUnit(unitDTO);
         return unitDTO;
     }
 
-    @PutMapping(path = "/unit/{id}", produces = {"application/json"})
+    @PutMapping(path = "/unit/{id}", produces = {"application/json"}, consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public UnitDTO updateUnit(@PathVariable("id") @Positive Long id, @Valid @RequestBody UnitDTO unitDTO) {
         unitService.updateUnitData(id, unitDTO);

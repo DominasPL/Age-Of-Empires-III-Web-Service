@@ -36,14 +36,14 @@ public class AgeController {
         return ageService.findById(id);
     }
 
-    @PostMapping(path = "/age", produces = {"application/json"})
+    @PostMapping(path = "/age", produces = {"application/json"}, consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public AgeDTO addNewAge(@Valid @RequestBody AgeDTO ageDTO) {
         ageService.addNewAge(ageDTO);
         return ageDTO;
     }
 
-    @PutMapping(path = "/age/{id}", produces = {"application/json"})
+    @PutMapping(path = "/age/{id}", produces = {"application/json"}, consumes = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
     public AgeDTO updateAgeData(@PathVariable("id") @Positive Long id, @Valid @RequestBody AgeDTO ageDTO) {
         ageService.updateAge(id, ageDTO);
