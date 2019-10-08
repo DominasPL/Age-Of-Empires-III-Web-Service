@@ -7,6 +7,7 @@ import com.github.dominaspl.aoewebservice.repositories.TypeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TypeServiceImpl implements TypeService {
@@ -29,5 +30,18 @@ public class TypeServiceImpl implements TypeService {
         }
 
         return TypeConverter.convertToTypeDTOList(allTypes);
+    }
+
+    @Override
+    public TypeDTO findById(Long id) {
+
+        if (id == null) {
+            throw new IllegalArgumentException("Id must be given!");
+        }
+
+        Optional<Type> optionalType = typeRepository.findByTypeIdAndStatus(id, statusService.getAllStatuses().get(1));
+        Type type = optionalType.orElseThrow(() -> new IllegalStateException("Type not found!"));
+
+        return TypeConverter.convertToTypeDTO(type);
     }
 }

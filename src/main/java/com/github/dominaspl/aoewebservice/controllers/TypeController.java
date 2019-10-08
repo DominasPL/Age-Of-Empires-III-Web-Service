@@ -3,10 +3,7 @@ package com.github.dominaspl.aoewebservice.controllers;
 import com.github.dominaspl.aoewebservice.dtos.TypeDTO;
 import com.github.dominaspl.aoewebservice.services.TypeService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,10 +19,15 @@ public class TypeController {
         this.typeService = typeService;
     }
 
-    @GetMapping
+    @GetMapping(produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public List<TypeDTO> getAllTypes() {
         return typeService.findAllTypes();
     }
 
+    @GetMapping(value = "/type/{id}", produces = {"application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public TypeDTO getTypeById(@PathVariable("id") Long id) {
+        return typeService.findById(id);
+    }
 }

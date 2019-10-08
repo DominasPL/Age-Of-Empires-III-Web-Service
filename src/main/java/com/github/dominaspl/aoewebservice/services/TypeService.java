@@ -8,5 +8,5 @@ public interface TypeService {
 
     List<TypeDTO> findAllTypes();
 
-
+    TypeDTO findById(Long id);
 }
