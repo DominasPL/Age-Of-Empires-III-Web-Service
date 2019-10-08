@@ -19,4 +19,8 @@ public class Type {
     @Column(nullable = false, unique = true)
     private String typeName;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
+
 }

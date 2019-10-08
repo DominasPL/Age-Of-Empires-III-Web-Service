@@ -4,31 +4,31 @@ VALUES (1), (0);
 INSERT INTO ages (age_name, status_id)
 VALUES ('I', 1), ('II', 1), ('III', 1), ('IV', 1), ('V', 1), ('Revolution', 1);
 
-INSERT INTO types (type_name)
+INSERT INTO types (type_name, status_id)
 VALUES
-('Infantry'),
-('Heavy Infantry'),
-('Ranged Infantry'),
-('Gunpowder Infantry'),
-('Archer'),
-('Native Warroior'),
-('Cavalry'),
-('Heavy Cavlary'),
-('Melee Cavlary'),
-('Melee Infantry'),
-('Military'),
-('Pet'),
-('Villager'),
-('Light Cavlary'),
-('Ranged Cavlary'),
-('Gunpowder Cavlary'),
-('Siege Unit'),
-('Artillery'),
-('Ship'),
-('Warship'),
-('Hero'),
-('Light Infantry'),
-('Wagon');
+('Infantry', 1),
+('Heavy Infantry', 1),
+('Ranged Infantry', 1),
+('Gunpowder Infantry', 1),
+('Archer', 1),
+('Native Warroior', 1),
+('Cavalry', 1),
+('Heavy Cavlary', 1),
+('Melee Cavlary', 1),
+('Melee Infantry', 1),
+('Military', 1),
+('Pet', 1),
+('Villager', 1),
+('Light Cavlary', 1),
+('Ranged Cavlary', 1),
+('Gunpowder Cavlary', 1),
+('Siege Unit', 1),
+('Artillery', 1),
+('Ship', 1),
+('Warship', 1),
+('Hero', 1),
+('Light Infantry', 1),
+('Wagon', 1);
 
 INSERT INTO civilizations (civilization_name, status_id)
 VALUES ('British', 1), ('Dutch', 1), ('French', 1), ('Germans', 1), ('Ottomans', 1), ('Portuguese', 1), ('Russians', 1), ('Spanish', 1),

@@ -12,15 +12,17 @@ import java.util.List;
 public class TypeServiceImpl implements TypeService {
 
     private TypeRepository typeRepository;
+    private StatusService statusService;
 
-    public TypeServiceImpl(TypeRepository typeRepository) {
+    public TypeServiceImpl(TypeRepository typeRepository, StatusService statusService) {
         this.typeRepository = typeRepository;
+        this.statusService = statusService;
     }
 
     @Override
     public List<TypeDTO> findAllTypes() {
 
-        List<Type> allTypes = typeRepository.findAll();
+        List<Type> allTypes = typeRepository.findAllByStatus(statusService.getAllStatuses().get(1));
 
         if (allTypes == null) {
             throw new IllegalStateException("Types not found!");
