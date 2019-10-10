@@ -33,4 +33,9 @@ public class UnitInformation {
     @ManyToOne
     @JoinColumn(name = "age_id")
     private Age age;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "stats_id", referencedColumnName = "stats_id")
+    private Statistics statistics;
+
 }

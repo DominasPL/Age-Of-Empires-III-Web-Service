@@ -13,7 +13,7 @@ public class AgeConverter {
 
         AgeDTO ageDTO = new AgeDTO();
         if (age == null) {
-            ageDTO.setAgeName("");
+            return ageDTO;
         } else if (age.getStatus() == status) {
             ageDTO.setAgeName(age.getAgeName());
         }
