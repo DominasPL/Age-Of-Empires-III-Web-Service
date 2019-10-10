@@ -28,7 +28,7 @@ public class UnitInformationConverter {
 
         UnitInformation unitInformation = new UnitInformation();
         unitInformation.setAge(AgeConverter.convertToAge(age, status));
-        unitInformation.setTypes(TypeConverter.convertToTypeList(filteredTypes));
+        unitInformation.setTypes(TypeConverter.convertToTypeList(filteredTypes, status));
         unitInformation.setCivilizations(CivilizationCoverter.convertToCivilizationList(new ArrayList<>(filteredCivilizations), status));
 
         return unitInformation;

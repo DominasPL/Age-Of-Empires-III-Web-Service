@@ -13,4 +13,6 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
     List<Unit> findByStatus(Status status);
 
     Optional<Unit> findByUnitIdAndStatus(Long id, Status status);
+
+    Optional<Unit> findByUnitName(String unitName);
 }

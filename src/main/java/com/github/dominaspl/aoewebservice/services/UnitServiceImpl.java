@@ -6,7 +6,9 @@ import com.github.dominaspl.aoewebservice.dtos.AgeDTO;
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.dtos.TypeDTO;
 import com.github.dominaspl.aoewebservice.dtos.UnitDTO;
+import com.github.dominaspl.aoewebservice.entities.Status;
 import com.github.dominaspl.aoewebservice.entities.Unit;
+import com.github.dominaspl.aoewebservice.entities.UnitInformation;
 import com.github.dominaspl.aoewebservice.repositories.UnitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,18 +69,36 @@ public class UnitServiceImpl implements UnitService {
             throw new IllegalArgumentException("Unit must be given!");
         }
 
-        AgeDTO ageDTO = checkAgeInDatabase(unitDTO.getUnitInformation().getAge());
-        Set<TypeDTO> filteredTypes = checkTypesInDatabase(unitDTO.getUnitInformation().getTypes());
-        Set<CivilizationDTO> filteredCivilizations = checkCivilizationInDatabase(unitDTO.getUnitInformation().getCivilizations());
+        Optional<Unit> optionalUnit = unitRepository.findByUnitName(unitDTO.getUnitName());
+        Unit unit = optionalUnit.orElse(null);
+        Status status = statusService.getAllStatuses().get(1);
 
-        Unit unit = UnitConverter.convertToUnit(unitDTO.getUnitName(),
-                ageDTO,
-                filteredTypes,
-                filteredCivilizations,
+        if (unit == null) {
+            unit = setUnitData(unitDTO);
+            unitRepository.save(unit);
+        } else if (unit.getStatus() != status) {
+            Long unitId = unit.getUnitId();
+            unit = setUnitData(unitDTO);
+            UnitInformation unitInformation = unit.getUnitInformation();
+            unitInformation.setUnitInformationId(unitId);
+            unit.setStatus(status);
+            unit.setUnitId(unitId);
+            unitRepository.save(unit);
+        } else {
+            throw new IllegalStateException("Unit already exists!");
+        }
+    }
+
+    private Unit setUnitData(UnitDTO unitDTO) {
+        Unit unit;
+        unit = UnitConverter.convertToUnit(unitDTO.getUnitName(),
+                checkAgeInDatabase(unitDTO.getUnitInformation().getAge()),
+                checkTypesInDatabase(unitDTO.getUnitInformation().getTypes()),
+                checkCivilizationInDatabase(unitDTO.getUnitInformation().getCivilizations()),
                 statusService.getAllStatuses().get(1)
         );
 
-        unitRepository.save(unit);
+        return unit;
     }
 
     @Override
