@@ -12,12 +12,12 @@ import java.util.Set;
 
 public class UnitInformationConverter {
 
-    public static UnitInformationDTO convertToUnitInformationDTO(UnitInformation unitInformation) {
+    public static UnitInformationDTO convertToUnitInformationDTO(UnitInformation unitInformation, Status status) {
 
         UnitInformationDTO unitInformationDTO = new UnitInformationDTO();
-        unitInformationDTO.setAge(AgeConverter.convertToAgeDTO(unitInformation.getAge()));
-        unitInformationDTO.setCivilizations(CivilizationCoverter.convertToCivilizationDTOList(unitInformation.getCivilizations()));
-        unitInformationDTO.setTypes(TypeConverter.convertToTypeDTOList(unitInformation.getTypes()));
+        unitInformationDTO.setAge(AgeConverter.convertToAgeDTO(unitInformation.getAge(), status));
+        unitInformationDTO.setCivilizations(CivilizationConverter.convertToCivilizationDTOList(unitInformation.getCivilizations(), status));
+        unitInformationDTO.setTypes(TypeConverter.convertToTypeDTOList(unitInformation.getTypes(), status));
 
         return unitInformationDTO;
 
@@ -29,7 +29,7 @@ public class UnitInformationConverter {
         UnitInformation unitInformation = new UnitInformation();
         unitInformation.setAge(AgeConverter.convertToAge(age, status));
         unitInformation.setTypes(TypeConverter.convertToTypeList(filteredTypes, status));
-        unitInformation.setCivilizations(CivilizationCoverter.convertToCivilizationList(new ArrayList<>(filteredCivilizations), status));
+        unitInformation.setCivilizations(CivilizationConverter.convertToCivilizationList(new ArrayList<>(filteredCivilizations), status));
 
         return unitInformation;
     }

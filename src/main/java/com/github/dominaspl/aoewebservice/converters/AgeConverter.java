@@ -9,13 +9,14 @@ import java.util.List;
 
 public class AgeConverter {
 
-    public static AgeDTO convertToAgeDTO(Age age) {
+    public static AgeDTO convertToAgeDTO(Age age, Status status) {
 
         AgeDTO ageDTO = new AgeDTO();
         if (age == null) {
             ageDTO.setAgeName("");
-        } else
+        } else if (age.getStatus() == status) {
             ageDTO.setAgeName(age.getAgeName());
+        }
 
         return ageDTO;
     }

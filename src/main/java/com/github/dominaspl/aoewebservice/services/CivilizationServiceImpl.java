@@ -1,6 +1,6 @@
 package com.github.dominaspl.aoewebservice.services;
 
-import com.github.dominaspl.aoewebservice.converters.CivilizationCoverter;
+import com.github.dominaspl.aoewebservice.converters.CivilizationConverter;
 import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
 import com.github.dominaspl.aoewebservice.entities.Civilization;
 import com.github.dominaspl.aoewebservice.entities.Status;
@@ -25,13 +25,14 @@ public class CivilizationServiceImpl implements CivilizationService {
     @Override
     public List<CivilizationDTO> getAllCivilizations() {
 
-        List<Civilization> allCivilizations = civilizationRepository.findByStatus(statusService.getAllStatuses().get(1));
+        Status status = statusService.getAllStatuses().get(1);
+        List<Civilization> allCivilizations = civilizationRepository.findByStatus(status);
 
         if (allCivilizations == null) {
             throw new IllegalStateException("Civilizations not found!");
         }
 
-        return CivilizationCoverter.convertToCivilizationDTOList(allCivilizations);
+        return CivilizationConverter.convertToCivilizationDTOList(allCivilizations, status);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class CivilizationServiceImpl implements CivilizationService {
         Optional<Civilization> optionalCivilization = civilizationRepository.findByCivilizationIdAndStatus(id, statusService.getAllStatuses().get(1));
         Civilization civilization = optionalCivilization.orElseThrow(() -> new IllegalStateException("Civilization not found!"));
 
-        return CivilizationCoverter.convertToCivilizationDTO(civilization);
+        return CivilizationConverter.convertToCivilizationDTO(civilization);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class CivilizationServiceImpl implements CivilizationService {
         Status status = statusService.getAllStatuses().get(1);
 
         if (civilization == null) {
-            civilizationRepository.save(CivilizationCoverter.convertToCivilization(civilizationDTO, statusService.getAllStatuses().get(1)));
+            civilizationRepository.save(CivilizationConverter.convertToCivilization(civilizationDTO, statusService.getAllStatuses().get(1)));
         } else if (civilization.getStatus() != status) {
             civilization.setStatus(status);
             civilizationRepository.save(civilization);
@@ -104,7 +105,7 @@ public class CivilizationServiceImpl implements CivilizationService {
         civilization.setStatus(statusService.getAllStatuses().get(0));
         civilizationRepository.save(civilization);
 
-        return CivilizationCoverter.convertToCivilizationDTO(civilization);
+        return CivilizationConverter.convertToCivilizationDTO(civilization);
 
     }
 

@@ -29,7 +29,7 @@ public class TypeServiceImpl implements TypeService {
             throw new IllegalStateException("Types not found!");
         }
 
-        return TypeConverter.convertToTypeDTOList(allTypes);
+        return TypeConverter.convertToTypeDTOList(allTypes, statusService.getAllStatuses().get(1));
     }
 
     @Override

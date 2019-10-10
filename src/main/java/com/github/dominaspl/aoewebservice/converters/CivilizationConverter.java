@@ -7,17 +7,19 @@ import com.github.dominaspl.aoewebservice.entities.Status;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CivilizationCoverter {
+public class CivilizationConverter {
 
-    public static List<CivilizationDTO> convertToCivilizationDTOList(List<Civilization> allCivilizations) {
+    public static List<CivilizationDTO> convertToCivilizationDTOList(List<Civilization> allCivilizations, Status status) {
 
         List<CivilizationDTO> civilizationDTOList = new ArrayList<>();
 
         for (Civilization civilization : allCivilizations) {
             CivilizationDTO civilizationDTO = new CivilizationDTO();
-            civilizationDTO.setCivilizationId(civilization.getCivilizationId());
-            civilizationDTO.setCivilizationName(civilization.getCivilizationName());
-            civilizationDTOList.add(civilizationDTO);
+            if (civilization.getStatus() == status) {
+                civilizationDTO.setCivilizationId(civilization.getCivilizationId());
+                civilizationDTO.setCivilizationName(civilization.getCivilizationName());
+                civilizationDTOList.add(civilizationDTO);
+            }
         }
 
         return civilizationDTOList;

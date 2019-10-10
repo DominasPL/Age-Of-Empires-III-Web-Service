@@ -44,7 +44,7 @@ public class UnitServiceImpl implements UnitService {
             throw new IllegalStateException("Units not found!");
         }
 
-        return UnitConverter.convertToUnitDTOList(allUnits);
+        return UnitConverter.convertToUnitDTOList(allUnits, statusService.getAllStatuses().get(1));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class UnitServiceImpl implements UnitService {
         Optional<Unit> optionalUnit = unitRepository.findByUnitIdAndStatus(id, statusService.getAllStatuses().get(1));
         Unit unit = optionalUnit.orElseThrow(() -> new IllegalStateException("Unit not found!"));
 
-        return UnitConverter.convertToUnitDTO(unit);
+        return UnitConverter.convertToUnitDTO(unit, statusService.getAllStatuses().get(1));
 
     }
 
@@ -110,9 +110,11 @@ public class UnitServiceImpl implements UnitService {
 
         Optional<Unit> optionalUnit = unitRepository.findById(id);
         Unit unit = optionalUnit.orElse(null);
+        Status status = statusService.getAllStatuses().get(1);
+
         if (unit == null) {
             addNewUnit(unitDTO);
-        } else {
+        } else if (unit.getStatus() == status) {
             unit.setUnitName(unitDTO.getUnitName());
             unit.setUnitInformation(UnitInformationConverter.convertToUnitInformation(
                     checkAgeInDatabase(unitDTO.getUnitInformation().getAge()),
@@ -122,6 +124,8 @@ public class UnitServiceImpl implements UnitService {
             ));
             unit.getUnitInformation().setUnitInformationId(id);
             unitRepository.save(unit);
+        } else {
+            throw new IllegalStateException("Unit not found!");
         }
     }
 
@@ -138,7 +142,7 @@ public class UnitServiceImpl implements UnitService {
         unit.setStatus(statusService.getAllStatuses().get(0));
         unitRepository.save(unit);
 
-        return UnitConverter.convertToUnitDTO(unit);
+        return UnitConverter.convertToUnitDTO(unit, statusService.getAllStatuses().get(1));
     }
 
     public Set<TypeDTO> checkTypesInDatabase(List<TypeDTO> typeDTOList) {

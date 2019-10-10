@@ -39,11 +39,11 @@ public class AgeServiceImpl implements AgeService {
         if (id == null) {
             throw new IllegalArgumentException("Id must be given!");
         }
-
-        Optional<Age> optionalAge = ageRepository.findByAgeIdAndStatus(id, statusService.getAllStatuses().get(1));
+        Status status = statusService.getAllStatuses().get(1);
+        Optional<Age> optionalAge = ageRepository.findByAgeIdAndStatus(id, status);
         Age age = optionalAge.orElseThrow(() -> new IllegalStateException("Age not found!"));
 
-        return AgeConverter.convertToAgeDTO(age);
+        return AgeConverter.convertToAgeDTO(age, status);
     }
 
     @Override
@@ -101,6 +101,6 @@ public class AgeServiceImpl implements AgeService {
         age.setStatus(statusService.getAllStatuses().get(0));
         ageRepository.save(age);
 
-        return AgeConverter.convertToAgeDTO(age);
+        return AgeConverter.convertToAgeDTO(age, statusService.getAllStatuses().get(1));
     }
 }

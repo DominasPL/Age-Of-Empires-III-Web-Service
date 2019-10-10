@@ -10,15 +10,17 @@ import java.util.Set;
 
 public class TypeConverter {
 
-    public static List<TypeDTO> convertToTypeDTOList(List<Type> types) {
+    public static List<TypeDTO> convertToTypeDTOList(List<Type> types, Status status) {
 
         List<TypeDTO> typeDTOList = new ArrayList<>();
 
         for (Type type : types) {
             TypeDTO typeDTO = new TypeDTO();
-            typeDTO.setTypeId(type.getTypeId());
-            typeDTO.setTypeName(type.getTypeName());
-            typeDTOList.add(typeDTO);
+            if (type.getStatus() == status) {
+                typeDTO.setTypeId(type.getTypeId());
+                typeDTO.setTypeName(type.getTypeName());
+                typeDTOList.add(typeDTO);
+            }
         }
 
         return typeDTOList;
