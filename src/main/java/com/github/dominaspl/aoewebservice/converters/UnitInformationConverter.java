@@ -18,6 +18,8 @@ public class UnitInformationConverter {
         unitInformationDTO.setAge(AgeConverter.convertToAgeDTO(unitInformation.getAge(), status));
         unitInformationDTO.setCivilizations(CivilizationConverter.convertToCivilizationDTOList(unitInformation.getCivilizations(), status));
         unitInformationDTO.setTypes(TypeConverter.convertToTypeDTOList(unitInformation.getTypes(), status));
+        unitInformationDTO.setStats(StatsConverter.convertToStatsDTO(unitInformation.getStatistics()));
+
 
         return unitInformationDTO;
 

@@ -16,7 +16,6 @@ public class UnitConverter {
     public static List<UnitDTO> convertToUnitDTOList(List<Unit> allUnits, Status status) {
 
         List<UnitDTO> unitDTOList = new ArrayList<>();
-
         for (Unit unit : allUnits) {
             UnitDTO unitDTO = new UnitDTO();
             unitDTO.setUnitInformation(UnitInformationConverter.convertToUnitInformationDTO(unit.getUnitInformation(), status));

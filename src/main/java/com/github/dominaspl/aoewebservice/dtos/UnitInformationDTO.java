@@ -20,4 +20,7 @@ public class UnitInformationDTO {
     @Valid
     private AgeDTO age;
 
+    @Valid
+    private StatsDTO stats;
+
 }
