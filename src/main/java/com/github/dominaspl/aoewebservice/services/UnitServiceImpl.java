@@ -78,9 +78,11 @@ public class UnitServiceImpl implements UnitService {
             unitRepository.save(unit);
         } else if (unit.getStatus() != status) {
             Long unitId = unit.getUnitId();
+            Long stats_id = unit.getUnitInformation().getStatistics().getStatsId();
             unit = setUnitData(unitDTO);
             UnitInformation unitInformation = unit.getUnitInformation();
             unitInformation.setUnitInformationId(unitId);
+            unit.getUnitInformation().getStatistics().setStatsId(stats_id);
             unit.setStatus(status);
             unit.setUnitId(unitId);
             unitRepository.save(unit);
