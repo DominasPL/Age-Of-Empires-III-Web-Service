@@ -1,7 +1,6 @@
 package com.github.dominaspl.aoewebservice.converters;
 
 import com.github.dominaspl.aoewebservice.dtos.*;
-import com.github.dominaspl.aoewebservice.entities.Statistics;
 import com.github.dominaspl.aoewebservice.entities.Status;
 import com.github.dominaspl.aoewebservice.entities.UnitInformation;
 

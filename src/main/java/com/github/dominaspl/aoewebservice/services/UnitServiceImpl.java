@@ -116,6 +116,7 @@ public class UnitServiceImpl implements UnitService {
         if (unit == null) {
             addNewUnit(unitDTO);
         } else if (unit.getStatus() == status) {
+            Long stats_id = unit.getUnitInformation().getStatistics().getStatsId();
             unit.setUnitName(unitDTO.getUnitName());
             unit.setUnitInformation(UnitInformationConverter.convertToUnitInformation(
                     checkAgeInDatabase(unitDTO.getUnitInformation().getAge()),
@@ -124,6 +125,7 @@ public class UnitServiceImpl implements UnitService {
                     unitDTO.getUnitInformation().getStats(),
                     unit.getStatus()
             ));
+            unit.getUnitInformation().getStatistics().setStatsId(stats_id);
             unit.getUnitInformation().setUnitInformationId(id);
             unitRepository.save(unit);
         } else {
