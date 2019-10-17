@@ -95,6 +95,7 @@ public class UnitServiceImpl implements UnitService {
                 checkAgeInDatabase(unitDTO.getUnitInformation().getAge()),
                 checkTypesInDatabase(unitDTO.getUnitInformation().getTypes()),
                 checkCivilizationInDatabase(unitDTO.getUnitInformation().getCivilizations()),
+                unitDTO.getUnitInformation().getStats(),
                 statusService.getAllStatuses().get(1)
         );
 
@@ -120,6 +121,7 @@ public class UnitServiceImpl implements UnitService {
                     checkAgeInDatabase(unitDTO.getUnitInformation().getAge()),
                     checkTypesInDatabase(unitDTO.getUnitInformation().getTypes()),
                     checkCivilizationInDatabase(unitDTO.getUnitInformation().getCivilizations()),
+                    unitDTO.getUnitInformation().getStats(),
                     unit.getStatus()
             ));
             unit.getUnitInformation().setUnitInformationId(id);

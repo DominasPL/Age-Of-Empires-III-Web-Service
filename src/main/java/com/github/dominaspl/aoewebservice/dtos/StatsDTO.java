@@ -3,6 +3,7 @@ package com.github.dominaspl.aoewebservice.dtos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.*;
 
@@ -37,12 +38,9 @@ public class StatsDTO {
     @Max(value = 10)
     private Integer population;
 
-    @DecimalMin("0.0")
-    @DecimalMax("1000.0")
+    @Range(min = 0, max = 1000)
     private Double xpTrainBounty;
 
-    @DecimalMin("0.0")
-    @DecimalMax("1000.0")
+    @Range(min = 0, max = 1000)
     private Double xpBounty;
-    
 }

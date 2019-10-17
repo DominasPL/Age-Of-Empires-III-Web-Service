@@ -23,4 +23,19 @@ public class StatsConverter {
 
         return statsDTO;
     }
+
+    public static Statistics convertToStats(StatsDTO statisticsDTO) {
+
+        Statistics statistics = new Statistics();
+        statistics.setHitPoints(statisticsDTO.getHitPoints());
+        statistics.setLineOfSight(statisticsDTO.getLineOfSight());
+        statistics.setPopulation(statisticsDTO.getPopulation());
+        statistics.setResistance(statisticsDTO.getResistance());
+        statistics.setSpeed(statisticsDTO.getSpeed());
+        statistics.setXpBounty(statisticsDTO.getXpBounty());
+        statistics.setXpTrainBounty(statisticsDTO.getXpTrainBounty());
+
+        return statistics;
+
+    }
 }

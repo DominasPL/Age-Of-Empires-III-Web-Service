@@ -1,9 +1,7 @@
 package com.github.dominaspl.aoewebservice.converters;
 
-import com.github.dominaspl.aoewebservice.dtos.AgeDTO;
-import com.github.dominaspl.aoewebservice.dtos.CivilizationDTO;
-import com.github.dominaspl.aoewebservice.dtos.TypeDTO;
-import com.github.dominaspl.aoewebservice.dtos.UnitDTO;
+import com.github.dominaspl.aoewebservice.dtos.*;
+import com.github.dominaspl.aoewebservice.entities.Statistics;
 import com.github.dominaspl.aoewebservice.entities.Status;
 import com.github.dominaspl.aoewebservice.entities.Unit;
 
@@ -36,12 +34,16 @@ public class UnitConverter {
     }
 
 
-    public static Unit convertToUnit(String unitName, AgeDTO age, Set<TypeDTO> filteredTypes, Set<CivilizationDTO> filteredCivilizations, Status status) {
+    public static Unit convertToUnit(String unitName, AgeDTO age,
+                                     Set<TypeDTO> filteredTypes,
+                                     Set<CivilizationDTO> filteredCivilizations,
+                                     StatsDTO statistics,
+                                     Status status) {
 
         Unit unit = new Unit();
         unit.setUnitName(unitName);
         unit.setStatus(status);
-        unit.setUnitInformation(UnitInformationConverter.convertToUnitInformation(age, filteredTypes, filteredCivilizations, status));
+        unit.setUnitInformation(UnitInformationConverter.convertToUnitInformation(age, filteredTypes, filteredCivilizations, statistics, status));
 
         return unit;
     }
