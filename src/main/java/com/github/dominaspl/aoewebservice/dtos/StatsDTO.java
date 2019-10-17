@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 
 @Data
 @RequiredArgsConstructor
@@ -21,6 +19,7 @@ public class StatsDTO {
     private Integer hitPoints;
 
     @NotNull
+    @Size(min = 1, max = 30)
     private String resistance;
 
     @NotNull
@@ -38,9 +37,12 @@ public class StatsDTO {
     @Max(value = 10)
     private Integer population;
 
+    @DecimalMin("0.0")
+    @DecimalMax("1000.0")
     private Double xpTrainBounty;
 
+    @DecimalMin("0.0")
+    @DecimalMax("1000.0")
     private Double xpBounty;
-
-
+    
 }
